@@ -1,8 +1,11 @@
 # 单机 😍🅿𝗋𝗈𝗆𝗉𝗍 小助手😍 
 
-## 本工程是 moonvy.com 的 OPS 项目分支
+# 1 介绍
+## 1.1 工程说明
+ - 本工程是 moonvy.com 的 OPS 项目分支，原工程链接 https://github.com/Moonvy/OpenPromptStudio
+ - 本工程有单机 release 包，如果你有 web 服务器，解压即完成部署
 
-## 提示词小助手 | 可视化编辑提示词
+## 1.2 提示词小助手 | 可视化编辑提示词
 
 这是一个旨在把 AIGC 提示词（现在支持 Midjourney）可视化并提供编辑功能的工具，有以下特性
 
@@ -14,8 +17,13 @@
 -   本地提示词词典，通过 Excel 管理
 ![工具截图](screenshot.png)
 
-# 部署
-## 准备本地服务器
+# 2 部署
+## 2.1 已有服务器部署
+ - 如果你已经有 web 服务器，要部署在域名根上，下载包解压即可完成部署
+ - `https://github.com/Tairraos/SDPromptTool/releases`
+ - 如果你不想部署在根上，很看
+
+## 2.2 准备本地服务器
  - 我使用 apache 官方出品的 XAMPP： https://www.apachefriends.org/
  - 我的 Xampp 安装在 `D:\apps\xampp` 目录,
  - 我的项目clone 在 `D:\Workspace\SDPromptTool`
@@ -52,7 +60,7 @@
 ```
  - 重启 apache，浏览器里访问 `https://prompt.localweb.com/` 看到 `test pass`, 说明本地服务器准备好了
 
-## 开始部署
+## 2.3 手动部署
  - `git clone https://github.com/Tairraos/SDPromptTool.git`
  - `cd SDPromptTool`
  - `npm i`
@@ -60,17 +68,18 @@
  - 完成，使用域名在浏览器里访问工具
  - 如果需要部署在其它位置，工程内全文搜索 `minifix` 把它指向你将要deploy的位置
 
-## 部署说明
+## 2.4 部署说明
  - 如果 apache 指向的位置不同，要修改 `minifix` 四处
      - 两处是翻译用的代理，我也不知道原工程为什么要写两遍一样的代码
      - 一处是 vue 路由配置，指定自己的根在哪里
      - 一处是 vite build 的时候，要把编译出来的文件拷到指定位置
 
-## 如何修改默认提示词词典
+# 3 维护
+## 3.1 如何维护提示词词典
  - 在 web deploy 目录会生成一个 prompt.xlsx，编辑它就可以更新自己的基础 prompt
  - 粘帖别人的 prompt 到工作区，清理，把喜欢的 prompt 都标灰，然后使用复制标灰功能，直接带翻译粘帖到 prompt.xlsx
 
-## 调试
+## 3.2 调试
  - 使用 `npm run dev` 调试源代码
      - 此时有 sourcemap 可以直接在浏览器 console 里调试源代码
      - 如果翻译代理不工作, 先 `npm run build` 一次，把翻译代理部署到位
@@ -82,7 +91,7 @@
  - npm run build 出错
      - 部署目录的 prompt.xls 正打开着的话，会被 excel 锁定冲突，导致部署失败
 
-# 相对原项目的改变
+# 4 相对原 Repo 的改动
 
  - 取消 Node server，换用 apache 服务
      - 翻译 api 跨域调用，需要有服务器代理，本项目使用 php 代理
