@@ -1,6 +1,6 @@
 {
-  "name": "@moonvy/open-prompt-studio",
-  "version": "1.4.4.local",
+  "name": "sd-prompt-tool",
+  "version": "1.5.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
