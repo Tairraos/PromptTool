@@ -25,7 +25,7 @@ let config = {
         // minify: "terser",
         assetsInlineLimit: 1024 * 10 /* 10kb */,
         emptyOutDir: true,
-        outDir: resolve(__dirname, "../Experiment/Tools/prompt/"), //minifix: 本项目相对于web page位置的目录
+        outDir: resolve(__dirname, "./dist"), //minifix: 部署目录相对于config文件的路径
         assetsDir: `assets`,
         publicDir: resolve(__dirname, "web/public"),
         rollupOptions: {

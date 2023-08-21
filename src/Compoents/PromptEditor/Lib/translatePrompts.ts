@@ -20,7 +20,7 @@ export async function translatePrompts(testList: string[], target = "zh") {
         })
 
         if (reqList.length == 0) return resultList.map((x) => x[1])
-        let baseurl = "https://workspace.localweb.com/Experiment/Tools/prompt/" //minifix: 你访问该工具的URL
+        let baseurl = "https://prompt.localweb.com/" //minifix: 你访问该工具的URL
         let host = baseurl.replace(/\/*$/, "") + "/mtproxy.php"
         let data = new URLSearchParams()
         target !== "zh" && data.append("to", "en")

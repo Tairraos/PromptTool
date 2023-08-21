@@ -5,16 +5,16 @@ import type { VueConstructor } from "vue"
 export function getRoutes() {
     return [
         {
-            //即使你不是把工具放在根上的，也不要删除本行，npm run dev要用
+            //即使你的工具不是放在 web 根上，也不要删除本行，npm run dev要用
             path: "/",
             name: "Index",
             component: vIndex,
         },
         {
-            //minifix: 你的工具URL路由, 用/结尾
-            //我的工具URL是 https://localweb.com/Experiment/Tools/prompt/ 
-            //如果是放在根上，直接一个/就可以
-            path: "/Experiment/Tools/prompt/", 
+            //minifix: 如果你的工具不想放在 web 根上
+            //比如你的web位置是用这样的URL访问 https://www.localweb.com/prompt/ 
+            //那就改成下面这样
+            path: "/prompt/", 
             name: "Index",
             component: vIndex,
         },
