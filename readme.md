@@ -28,10 +28,11 @@
  - 我的 Xampp 安装在 `D:\apps\xampp` 目录,
  - 我的项目clone 在 `D:\Workspace\SDPromptTool`
  - 在 `D:\Workspace\SDPromptTool\dist` 下添加一个 `index.html` 文件，内容为 `test pass`
- - 在 hosts 文件里添加本机域名 `127.0.0.1 prompt.localweb.com`
+ - 在 hosts 文件里添加本机域名 `127.0.0.1 prompt.localweb.com`，你需要可以多添几个
  - 使用工具生成 https 证书： https://github.com/FiloSottile/mkcert/releases
- - `mkcert-v1.4.4-windows-amd64.exe localhost www.localweb.com hack.localweb.com prompt.localweb.com`
- - 生成完的文件，key文体重命名为 `server.key`，另一个为 `server.crt`，移到 `D:\Apps\Xampp\apache\conf\`
+ - `mkcert-v1.4.4-windows-amd64.exe -key-file server.key -cert-file server.crt localhost www.localweb.com prompt.localweb.com`
+ - 这行命令只为证书添加了三个域名，你可以把本机所有的域名都添上，全用上 https
+ - 生成的 `server.key` 和 `server.crt`，移到 `D:\Apps\Xampp\apache\conf\`
  - 编辑 `D:\Apps\Xampp\apache\conf\extra\httpd-vhosts.conf`, 添加如下内容
 ```
 <VirtualHost *:80>
