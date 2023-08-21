@@ -1,0 +1,8 @@
+<?php
+$API_PROVIDER = "youdao"; //值可以是 "youdao" 和 "baidu", 缺省是"youdao"
+
+//如果选择百度翻译api，以下值必须填
+//百度翻译API申请： https://api.fanyi.baidu.com/
+$APP_ID = "20239999999999999";      //替换为您的APPID
+$SEC_KEY = "abE_zzzzzZZZZZzzzzzz";  //替换为您的密钥
+?>

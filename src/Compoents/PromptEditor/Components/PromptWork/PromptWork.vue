@@ -45,13 +45,21 @@
                             @click="doClear()"
                             v-tooltip="'清空输入'"
                             class="icon"
-                            :class="{ disabled: inputText?.length == '' }"
+                            :class="{ disabled: inputText == '' }"
                         >
                             <Icon icon="radix-icons:crumpled-paper" />
                         </button>
+                        <button
+                            @click="doFormatInput()"
+                            v-tooltip="'整理输入'"
+                            class="icon"
+                            :class="{ disabled: inputText == '' }"
+                        >
+                            <Icon icon="radix-icons:magic-wand" />
+                        </button>
                     </div>
                     <div class="button-group">
-                        <button @click="toPng" v-tooltip="`导出 PNG 图片`">
+                        <button @click="toPng({ scale: 1 })" v-tooltip="`导出 PNG 图片`">
                             <Icon icon="fluent:image-16-regular" />
                         </button>
                         <button @click="toPng({ scale: 2 })" v-tooltip="`导出 PNG 图片（2X）`">
@@ -421,7 +429,7 @@ import vPromptList from "../PromptList/PromptList.vue"
 import debounce from "lodash/debounce"
 import { PromptItem } from "../../Sub/PromptItem"
 import { useClipboard } from "@vueuse/core"
-let { copy } = useClipboard({ legacy: true })
+let { copy } = useClipboard()
 import { copyBlobToClipboard } from "copy-image-clipboard"
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image"
 import { getImageSize } from "html-to-image/src/util"
@@ -490,6 +498,11 @@ export default Vue.extend({
         },
         doSwitchIO() {
             this.inputText = this.promptWork.exportPrompts()
+        },
+        async doFormatInput() {
+            this.inputText = this.promptWork.formatInput(this.inputText)
+            await this.doImportByInputThrottle()
+            this.doExportPrompt()
         },
         doDisableAll() {
             this.promptWork.disableAll()

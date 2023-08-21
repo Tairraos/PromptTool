@@ -81,7 +81,7 @@ export class PromptWork {
         function createListMap(words: IPromptWord[]) {
             let subTypeMap: { [subType: string]: IPromptWord[] } = {}
             words.forEach((word) => {
-                let subType = word.subType ?? "normal"
+                let subType = word.subType ?? "character"
                 if (word.isEg) subType = "eg"
                 if (subType in subTypeMap) {
                     subTypeMap[subType].push(word)
@@ -108,6 +108,10 @@ export class PromptWork {
         return stringifyPrompts(this.groups, { parser: this.data.parser ?? "midjourney" })
     }
 
+    formatInput(input: string) {
+        return Array.from(new Set(input.split(/[\s\n]*,[\s\n]*/).map(i=>i.replace(/[\(\)\[\]\{\}]|:[\d\.]+|<.*>/g, "")).filter(i=>i))).join(", ")
+    }
+
     async reflowPrompts(addPrompt?: string) {
         let prompt = this.exportPrompts()
         if (addPrompt) {
@@ -121,7 +125,7 @@ export class PromptWork {
         let needTranslateItems: PromptItem[] = []
         for (let group of this.groups) {
             for (let list of group.lists) {
-                if (list.data.type !== "normal") continue
+                if (list.data.type !== "character") continue
                 for (let item of list.items) {
                     if (item.data.word.langText) continue
                     let cp = chinesePercentage(item.data.word.text)

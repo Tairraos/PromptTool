@@ -1,9 +1,10 @@
 import axios from "axios"
 import { chinesePercentage } from "./chinesePercentage"
+import { AnyARecord } from "dns"
 ;(<any>window)._translatePrompts = translatePrompts
 
 let cache: any = {}
-export async function translatePrompts(testList: string[], options?: { server?: string; to?: string }) {
+export async function translatePrompts(testList: string[], target = "zh") {
     try {
         let resultList: string[][] = []
         let reqList: [string, number][] = []
@@ -18,16 +19,16 @@ export async function translatePrompts(testList: string[], options?: { server?: 
             }
         })
 
-        let host = (<any>globalThis).__OPS_SERVER
-        let orgWords = reqList.map((req) => req[0])
-        if (orgWords.length == 0) return resultList.map((x) => x[1])
-        let re = await axios.post(`${options?.server ?? `${host}/translate/prompts`}`, {
-            words: orgWords,
-            to: options?.to ?? "zh",
-        })
+        if (reqList.length == 0) return resultList.map((x) => x[1])
+        let baseurl = "https://workspace.localweb.com/Experiment/Tools/prompt/" //minifix: 你访问该工具的URL
+        let host = baseurl.replace(/\/*$/, "") + "/mtproxy.php"
+        let data = new URLSearchParams()
+        target !== "zh" && data.append("to", "en")
+        data.append("text", reqList.map((req) => `${req[0]}`).join("\n"))
+        let re = await axios.post(host, data, { headers: { "Content-Type": "application/x-www-form-urlencoded" } })
 
         if (re && re.data) {
-            let list = re.data
+            let list = re.data.split("|")
             list.forEach((text: string, i: number) => {
                 if (reqList[i]) {
                     let raw = reqList[i][0]
@@ -55,7 +56,7 @@ export async function translateZh2En(texts: string[]) {
     let prompts = zhWords.map((x) => {
         return x[0]
     })
-    let re = await translatePrompts(prompts, { to: "en" })
+    let re = await translatePrompts(prompts, "en")
     // console.log("[translateZh2En]", prompts, "=>", re)
     if (re) {
         re.forEach((en, i) => {

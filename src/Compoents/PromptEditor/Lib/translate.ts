@@ -1,14 +1,9 @@
 import axios from "axios"
-
-
-(<any>window)._translate = translate
+;(<any>window)._translate = translate
 
 let cache: any = {}
 
-export async function translate(
-    testList: string[],
-    options: { server: string } = { server: "http://localhost:19212/prompt-studio/translate" }
-) {
+export async function translate(testList: string[]) {
     let resultList: string[][] = []
     let reqList: [string, number][] = []
     testList.forEach((text, i) => {
@@ -21,23 +16,25 @@ export async function translate(
         }
     })
 
-    let rawText = reqList.map((req) => req[0]).join("\n")
-    let re = await axios.post(`${options.server}`, { text: rawText, to: "zh-cn" })
+    if (reqList.length == 0) return resultList.map((x) => x[1])
+    let baseurl = "https://workspace.localweb.com/Experiment/Tools/prompt/" //minifix: 你访问该工具的URL
+    let host = baseurl.replace(/\/*$/, "") + "/mtproxy.php" //能访问到代理的路径
+    let data = new URLSearchParams()
+    data.append("text", reqList.map((req) => `${req[0]}`).join("\n"))
+    let re = await axios.post(host, data, { headers: { "Content-Type": "application/x-www-form-urlencoded" } })
 
     if (re && re.data) {
-        let list = re.data.split("\n")
+        let list = re.data.split("|")
         list.forEach((text: string, i: number) => {
             if (reqList[i]) {
                 let raw = reqList[i][0]
                 let index = reqList[i][1]
                 resultList[index].push(text)
                 cache[raw] = text
+                if (!cache[text]) cache[text] = raw
             }
         })
-
         return resultList.map((x) => x[1])
     }
 }
 translate.cache = cache
-
-

@@ -1,5 +1,5 @@
 export const SubTypeDisplayMap: any = {
-    normal: "普通",
+    character: "角色",
     style: "风格",
     quality: "质量",
     command: "命令",

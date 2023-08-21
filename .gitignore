@@ -7,3 +7,4 @@ yarn-error.log
 RefreshAndPredload.log
 secret.json
 .env
+web/public/keys.php

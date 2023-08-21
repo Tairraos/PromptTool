@@ -1,17 +1,17 @@
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue2"
-import legacy from "@vitejs/plugin-legacy"
 import path from "path"
+import url from "url"
 import { resolve } from "path"
 import progress from "vite-plugin-progress"
 import * as process from "process"
 import * as dotenv from "dotenv"
 dotenv.config()
 
-// https://vitejs.dev/config/
+const __dirname = path.dirname(url.fileURLToPath (import.meta.url))
 let config = {
     root: "./web",
-    base: "/apps/ops/",
+    base: "./",
     server: {
         port: 12833,
         host: "0.0.0.0",
@@ -25,8 +25,8 @@ let config = {
         // minify: "terser",
         assetsInlineLimit: 1024 * 10 /* 10kb */,
         emptyOutDir: true,
-        outDir: resolve(__dirname, "dist"),
-        assetsDir: `version/2023-03/`,
+        outDir: resolve(__dirname, "../Experiment/Tools/prompt/"), //minifix: 本项目相对于web page位置的目录
+        assetsDir: `assets`,
         publicDir: resolve(__dirname, "web/public"),
         rollupOptions: {
             input: {
@@ -36,16 +36,11 @@ let config = {
         reportCompressedSize: false,
     },
     resolve: {},
-    define: {
-        "process.env.LOCAL_TRANSLATE_HOST": process.env.LOCAL_TRANSLATE_HOST
-            ? `"${process.env.LOCAL_TRANSLATE_HOST}"`
-            : "false",
-    },
+    define: {},
 }
 // ------------- [vite build] ------------
 if (process.env.NODE_ENV == "production") {
     // @ts-ignore
     // config.build.minify = "terser"
-    config.plugins.push(legacy({ targets: ["defaults", "not IE 11"] }))
 }
-export default defineConfig(<any>config)
+export default defineConfig(config)

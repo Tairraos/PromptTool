@@ -5,7 +5,6 @@
 </template>
 <style lang="scss"></style>
 <script>
-import "../Style/Font"
-import "./../Style/var.scss"
+import "../Style/var.scss"
 export default {}
 </script>

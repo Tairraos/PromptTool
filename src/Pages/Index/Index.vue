@@ -1,11 +1,7 @@
 <template>
     <div class="IndexPage">
         <nav>
-            <a class="logo" href="https://github.com/Moonvy/OpenPromptStudio"><b>OPS</b>/OpenPromptStudio</a>
-            <a class="icon-link" href="https://github.com/Moonvy/OpenPromptStudio" target="_blank">
-                <Icon icon="radix-icons:github-logo"
-            /></a>
-
+            <div class="title">😍🅿𝗋𝗈𝗆𝗉𝗍 小助手😍</div>
             <div class="dict-button-box" @click="toggleDictPad()">
                 提示词词典
                 <button class="icon dict-button"><Icon icon="mingcute:book-4-fill" /></button>
@@ -16,21 +12,12 @@
             <div class="title">
                 <Icon icon="mingcute:book-4-fill" />
                 提示词词典
-                <!--                <a class="github-dict" href="https://github.com/Moonvy/OpenPromptStudio" target="_blank">-->
-                <!--                    <Icon icon="radix-icons:github-logo" />一起维护词典</a-->
-                <!--                >-->
                 <button class="icon close-button" @click="toggleDictPad(false)">
                     <Icon icon="radix-icons:cross-1" />
                 </button>
             </div>
             <PromptDict />
         </section>
-        <footer>
-            <a href="https://github.com/Moonvy/OpenPromptStudio" target="_blank">
-                <img class="icon" src="/icon.svg" /> OpenPromptStudio / v{{ version }} /
-            </a>
-            <a href="https://moonvy.com/?homepage"> made by <img src="./assets/logo_full_cn.svg" /></a>
-        </footer>
     </div>
 </template>
 <style lang="scss">
@@ -42,25 +29,10 @@
         padding-bottom: 20px;
         padding-left: 23px;
         padding-right: 14px;
-        .logo {
-            font-family: "JetBrains Mono";
-            color: #9f9f9f;
-            text-shadow: 0 1px 1px #ffffff;
-            display: flex;
-            place-items: center;
-            font-weight: 200;
-            display: flex;
-            place-content: flex-start;
-            text-decoration: none;
-        }
 
-        .icon-link {
-            display: flex;
-            place-items: center;
-            font-size: 18px;
-            color: #888686;
-            text-shadow: 0 1px 1px #ffffff;
-            margin-left: 6px;
+        .title {
+            font-size: 24px;
+            font-weight: 900;
         }
 
         .dict-button-box {

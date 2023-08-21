@@ -1,162 +1,107 @@
-# 🥣 OPS/OpenPromptStudio
+# 单机 😍🅿𝗋𝗈𝗆𝗉𝗍 小助手😍 
 
-## 提示词工作室 | 可视化编辑提示词
+## 分支于 moonvy.com 的 OPS 项目
 
-<p align="center">
-    <img width="1430" alt="OPS-cover" src="https://user-images.githubusercontent.com/82231420/230757122-5cf5659e-9e1a-4288-80fd-84ec229a063e.png">
-</p>
-
-[**🥣 立即试试** moonvy.com/apps/ops/](https://moonvy.com/apps/ops/)
+## 提示词小助手 | 可视化编辑提示词
 
 这是一个旨在把 AIGC 提示词（现在支持 Midjourney）可视化并提供编辑功能的工具，有以下特性
 
 -   显示英文提示词的中文翻译
 -   翻译输入的中文提示词到英文（因为 Midjourney 仅支持英文提示词）
--   为提示词进行分类（普通、样式、质量、命令）
+-   为提示词进行分类（角色、风格、质量、命令、负面）
 -   轻松的排序、隐藏提示词
 -   把提示词可视化结果导出为图片
--   常用提示词词典
--   通过 Notion 管理提示词词典
+-   本地提示词词典，通过 Excel 管理
 
-## 使用教程
+## 相对原项目的改变
 
-<a href="https://www.bilibili.com/video/BV15N411P7D3/?spm_id_from=333.337.search-card.all.click&vd_source=1f6edbc8e03c44932da52d02c0c11c1c" target="_blank">
- <img width="300" alt="OPS-cover" src="https://user-images.githubusercontent.com/82231420/230757939-dde301f1-bf68-4455-83c6-f7dd2214c68b.png">
-</a>
-
-[📺 B 站视频教程](https://www.bilibili.com/video/BV15N411P7D3/?spm_id_from=333.337.search-card.all.click&vd_source=1f6edbc8e03c44932da52d02c0c11c1c)
-
-## 如何连接的我的 Notion 来管理自己的词典
-
-OPS 支持使用 [Notion](https://www.notion.so/) 来管理自己的词典，使用 Notion 管理相对简单，可自定义程度也很高。
-
-![ ](./doc/assets/notion-me.gif)
-
-### 1. 复制「演示-AIGC 提示词库」
-
-复制我们的演示文档的自己的 Notion 工作区中
-
-[**📕 演示-AIGC 提示词库**](https://moonvy.notion.site/b768c5c1852f4e2fbaee1b4a99f26d49?v=346e91e8114648c59079eeea2d9d56c7)
-
-<p align="center">
-    <img width="720" src="./doc/assets/notion-demo.jpg">
-</p>
-
-保持表头定义： `text`, `subType`、`dir`、`lang_zh` 不要变（或者你可以新建一个 Notion 数据库，只要有这些表头 OPS 就能连接的这个数据库）
-
-#### Notion 表头定义
-
-| 表头    | 作用                                                    |
-| ------- | ------------------------------------------------------- |
-| text    | 提示词原文（不区分大小写）                              |
-| lang_zh | 对应的中文翻译                                          |
-| subType | 提示词在 OPS 中的分类（`普通`、`风格`、`质量`、`命令`） |
-| dir     | 词典中的分类，子分类用`/`分隔如：`风格/绘画风格`        |
-| alias   | 别名，可以有多个，用`,` 分隔                            |
-
-### 2. 创建自己的 Notion 集成插件（integrations）
-
-要让 OPS 连接到自己的 Notion 数据库，需要创建一个自己的集成（integrations）。OPS 会通过此集成的权限连接到你的数据库。
-
-#### 2.1 打开集成开发页面
-
-打开 Notion 的集成开发页面 [🔗 www.notion.so/my-integrations](https://www.notion.so/my-integrations)
-点击 「+ new integrations」按钮创建一个新集成插件
-
-<p align="center">
-    <img width="720" src="./doc/assets/Myintegrations-1@2x.jpeg">
-</p>
-
-#### 2.2 创建集成插件
-
-在集成插件页面中选择允许访问的 Notion 工作区（Workspace），你的 Notion 数据库需要创建在此工作区下，OPS 才能通过集成插件访问。
-
-<p align="center">
-    <img width="720" src="./doc/assets/Myintegrations-2@2x.jpeg">
-</p>
-
-#### 2.3 获取集成插件 Token 密钥
-
-集成插件创建完毕后，复制 Token 秘钥保存下来，你将使用此 Token 作为访问凭证，请妥善保管不要在公开场合泄露。
-
-<p align="center">
-    <img width="720" src="./doc/assets/Myintegrations-3@2x.jpeg">
-</p>
-
-#### 2.4 在数据库页面链接到你的集成
-
-集成插件创建后，还需要在你的 Notion 数据库的菜单中连接到你的集成插件：
-
-<p align="center">
-    <img width="720" src="https://user-images.githubusercontent.com/82231420/230757501-7630d405-adcc-4611-aa8a-07875ce5a932.jpg">
-</p>
-
-### 3. 在 OPS 中配置 Notion
-
-在 OPS 右上角打开提示词词典，鼠标放在「连接我的 Notion」按钮上，展开设置面板
-
--   「Integrations Token」 里面填入前面我们生成的集成 Token 秘钥（秘钥只会保存在浏览器本地（localStorage），不会被上传到任何地方）
-
--   「Database ID」里粘贴你 Notion 数据库的访问地址
-
--   然后点击「载入」按钮
-
-<p align="center">
-    <img width="720" src="https://user-images.githubusercontent.com/82231420/230758301-57f5304e-b83b-4ee6-a91c-0c030e84213a.png">
-</p>
-
-#### 获取 Notion 数据库的访问地址（`DatabaseID`）
-
-在 Notion 数据库菜单中点击 「Copy link to view」 就可以了，粘贴 Notion 数据库地址到 OPS 的配置输入框后会自动提取 `DatabaseID`
-
-<p align="center">
-    <img width="720" src="https://user-images.githubusercontent.com/82231420/230758271-c2ee8ba3-e694-45db-a209-55c4d1744171.png">
-</p>
-
-## 更好的体验
-
-你可以在 [zeroG 浏览器](https://moonvy.com/zeroG/) 里让 OPS
-与 Discord 在一个无限画布中使用，获得更好的体验
-
-![截屏2023-04-06 15.51.23.png](./doc%2Fassets%2F%E6%88%AA%E5%B1%8F2023-04-06%2015.51.23.png)
+ - 取消 Node server，换用 apache 服务
+     - 推荐 XAMPP： https://www.apachefriends.org/
+     - 安装它，还能在本地跑很多东西，比如 wordpress, discuz 论坛...
+     - 还能调试自己的 web 项目，比如本项目
+     - 翻译 api 跨域调用，需要有服务器代理，本项目使用 php 代理
+ - 取消 Notion 库，放弃 Cloud 服务，打造单纯单机工具
+ - 使用单个 Excel 代替原版多个 csv 文件的管理方式
+     - 取消使用 csv build json 来使用，直接 load excel
+     - prompt 库放在 web/public/prompt.xlsx
+     - build 的时候此文件会被复制到部署位置
+     - 如果直接维护部署位置的 prompt 库，不需要重新build，刷新页面即起作用
+     - build 时会检测部署位置下的 prompt.xlsx 是否比工程中的新
+     - 如果部署位置 prompt.xlsx 更新，build 的时候会将它复制到工程
+     - 更新的 prompt.xlsx 可跟随工程一并提交到 git repo 里保存
+ - 优化翻译机制
+     - 缺省使用有道翻译，不需要申请 api key，开箱即用
+     - 也可以选择百度翻译，准确性更高，申请地址：https://api.fanyi.baidu.com/
+     - 如果选择百度，将 web/public/keys.php.example 改名成 keys.php
+     - keys.php 被写在 .gitignore 里，不会被上传到 git, 放心填写隐私 key
+ - 增加了清理 prompt 的功能
+     - 在界面绿色提示词下方，一个魔术棒图标
+     - 清理会去除权重，去除重复，去除非 prompt 指令，留下单纯的prompt
+ - 增加了批量复制 prompt 功能
+     - 点击下方【复制标灰的提示词】会把标灰的提示词以 Excel 格式复制到剪贴板
+     - 打开 prompt.xlsx 可以直接帖进空白的行收集，为提示词添加分类名即可
+     - 如果标灰的 prompt 已经存在于 xlsx 里，或者刚刚被复制过，不会再次被复制
+ - 增加了未知提示词样式
+     - 在 prompt.xlsx 里没有的 prompt 底部会显示一条红线
+ - 扫描了 civitai 的几万个图片 prompt, 添加大量 Prompt
+     - 特征 61
+     - 姿势 51
+     - 上装 24
+     - 下装 12
+     - 鞋袜 12
+     - 帽子 15
+     - 饰品 25
+     - 环境 88
+     - 画风 28
+     - 流派 50
+     - 出图偏好 28
+     - 画面效果 41
+     - 图片形式 55
+     - 图片视角 47
 
 ## 开发者
 
-本地运行需要 NodeJS 环境
+ - 开发者通常都会在本地跑一个 web 服务器方便自己开发和调试吧
+ - 大部分人会选择 apache 官方出品的 XAMPP 吧： https://www.apachefriends.org/
+ - 使用这个工具可以解决本地 https 证书问题： https://github.com/FiloSottile/mkcert/releases
+ - 下面命令一次性为多个域名生成证书，域名写在 hosts 里，都指向 `127.0.0.1` 即可用任意一个访问本机服务器
+ - `mkcert-v1.4.4-windows-amd64.exe localhost www.localweb.com hack.localweb.com workspace.localweb.com`
+ - 本机服务器可以配置多个域名指向不同的目标，搜索 apache vhost
 
-使用 `npm run start` 运行
+## 部署
 
-运行打开后访问 `localhost:12833/apps/ops/`
+ - clone 当前分支
+ - npm i 安装依赖
+ - 全文搜索 `minifix` 把它指向你将要deploy的位置
+ - npm run build
+ - 使用域名在浏览器里访问工具
 
-### Docker
+## 部署说明
+ - 因为我们的web放的位置不同，所以要做此修改，minifix 有四处
+     - 两处是翻译用的代理，我也不知道原工程为什么要写两遍一样的代码
+     - 一处是 vue 路由配置，指定自己的根在哪里
+     - 一处是 vite build 的时候，要把编译出来的文件拷到指定位置
+ - 我的工具地址是：https://workspace.localweb.com/Experiment/Tools/prompt/
+ - 我的本地文件目录是：d:\Workspace\Experiment\Tools\prompt
+ - 所以你会在代码的 `minifix` 里看到这个路径
+ - 你也可以添加一个 https://prompt.localweb.com/ 来使用
+ - 这些信息可以帮你更好地理理代码里 `minifix` 的原始值
 
-如果你不想安装 NodeJS 环境，可以使用 Docker 运行，参考 [./docker](https://github.com/Moonvy/OpenPromptStudio/tree/master/docker/)
+## 如何修改默认提示词词典
 
-### 如何修改默认提示词词典
+ - 在 web deploy 目录会生成一个 prompt.xlsx，编辑它就可以更新自己的基础 prompt
+ - 粘帖别人的 prompt 到工作区，清理，把喜欢的 prompt 都标灰，然后使用复制标灰功能，直接带翻译粘帖到 prompt.xlsx
 
-1. 在 [./data/src](https://github.com/Moonvy/OpenPromptStudio/tree/master/data/src) 中编辑 `.csv` 文件，你可以用 Excel、Numbers 或者纯文本编辑器编辑。
+## 调试
+ - 使用 `npm run dev` 可以不 build 直接跑
+     - 此时有 sourcemap 可以直接在浏览器 console 里调试源代码
+     - 翻译代理不能工作, 先 `npm run build` 一次，就会把翻译代理部署到可以工作的位置了
+ - 加载 Excel 出错
+     - 通常是 prompt.xls 第三栏 dir 为空
+     - 也有可能是在下面的空白行有一个空格，程序读到非空行即会当做数据解析
+     - 代码已经做了容错，上面的情况几乎不会发生
+     - 缺 dir 会用最近读到的一个 dir 名字代替
+     - 有无数据的单纯空格行会直接跳过
+ - npm run build 出错
+     - 注意部署目录的 prompt.xls 打开着的话，就被 excel 锁定导致部署失败 
 
-2. 在 [Notion](https://www.notion.so/) 中编辑（[./data/src/notion/fromNotion.js](https://github.com/Moonvy/OpenPromptStudio/tree/master/data/src/notion/fromNotion.js) ）
-
-### 翻译服务
-
-在 `./server` 文件夹中有一个翻译服务的简单实现，调用腾讯翻译
-你需要申请一个[腾讯机器翻译的账号](https://bobtranslate.com/service/translate/tencent.html)（每月免费额度 500 万字）
-然后在项目根目录创建一个 `.env` 文件写入你的的 `SECRET_ID` 与 `SECRET_KEY`
-
-`.env`：
-
-```env
-# 翻译机配置 https://bobtranslate.com/service/translate/tencent.html
-TENCENT_SECRET_ID="AKIDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-TENCENT_SECRET_KEY="a5XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-
-# 自定义翻译服务地址 [可选] (如果你部署在服务器上，通过此配置指定 Web 端访问翻译服务的地址)
-# LOCAL_TRANSLATE_HOST="192.168.50.222:3000"
-```
-
-然后运行 `npm run serve` 启动 `OPS 服务` 和 `本地翻译服务`
-
-#### 自部署
-
-如果要部署到自己的服务器，请在 `.env` 文件中配置翻译服务的访问地址： `LOCAL_TRANSLATE_HOST`，如 `192.168.50.222:3000`或者`https://mySite.com`，在 Web 页中会根据此地址发起请求，请根据你部署后实际访问地址来配置。

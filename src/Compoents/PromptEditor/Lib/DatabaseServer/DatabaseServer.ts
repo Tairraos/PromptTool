@@ -1,4 +1,4 @@
-import { fetchFromNotion } from "./lib/fetchFromNotion"
+import XLSX from "xlsx-js-style"
 
 export interface IPromptDefineItem {
     text: string
@@ -13,7 +13,6 @@ export interface IPromptDefineItem {
 
 export class DatabaseServer {
     localPromptDefineMap: { [key: string]: IPromptDefineItem } = {}
-    notionPromptDefineMap: { [key: string]: IPromptDefineItem } = {}
     isReady: null | Promise<boolean> = null
     constructor() {}
     async ready() {
@@ -22,10 +21,42 @@ export class DatabaseServer {
         return this.isReady
     }
     async init() {
-        // localJson
-        let localPromptDescMap = await (await fetch("./localPromptDefineMap.json")).json()
-        // console.log('localPromptDescMap',localPromptDescMap)
-        this.localPromptDefineMap = localPromptDescMap
+        let buffer = await (await fetch("./prompt.xlsx")).arrayBuffer()
+        let workbook = XLSX.read(new Uint8Array(buffer), { type: "array" }),
+            subTypeMap:any = {
+                角色: "character",
+                风格: "style",
+                质量: "quality",
+                命令: "command",
+                负面: "eg",
+            },
+            sheetNameList = workbook.SheetNames,
+            mapDict:any = {}
+
+        sheetNameList.forEach((sheetName) => {
+            let subTypeName = sheetName.replace(/[-\.].*/, ""),
+            subType = subTypeMap[subTypeName];
+            if (!subType) {
+                console.log(`遇到无对应 subType 的 Sheet: "${sheetName}", 跳过`)
+                return; //如果sheet不是以subType名字开头的话，就跳过
+            }
+            console.log(`已经读入 ${sheetName}" 对应 ${subType} 类型`)
+            let ws:any = workbook.Sheets[sheetName],
+                lenth = XLSX.utils.decode_range(ws["!ref"]).e.r                          //How much lines of this sheet
+            Array.from(Array(lenth), (_, i) => i + 2).forEach((id) => {
+                if (ws[`A${id}`]) {
+                    let prompt:any = { text: ws[`A${id}`].v, dir: `${subTypeName}/未知` } //text
+                    ws[`B${id}`] && (prompt.lang_zh = ws[`B${id}`].v)                    //lang_zh
+                    prompt.subType = subType                                             //subType
+                    ws[`E${id}`] && (prompt.desc = ws[`E${id}`].v)                       //desc
+                    ws[`D${id}`] && (prompt.sampleCmds = JSON.parse(ws[`D${id}`].v))     //sampleCmds
+                    ws[`C${id}`] && (prompt.dir = `${subTypeName}/${ws[`C${id}`].v}`)    //dir
+                    mapDict[ws[`A${id}`].v] = prompt
+                }
+            })
+        })
+
+        this.localPromptDefineMap = mapDict
         return true
     }
     async queryPromptsDefine(prompts: string[]): Promise<IPromptDefineItem[]> {
@@ -42,21 +73,9 @@ export class DatabaseServer {
         return <any>reuslt
     }
 
-    async getPromptsDefine(options?: { onlyMyNotion?: boolean }) {
+    async getPromptsDefine() {
         await this.ready()
-        if (options?.onlyMyNotion) {
-            return this.notionPromptDefineMap
-        } else {
-            return this.localPromptDefineMap
-        }
-    }
-
-    async fetchNotion(options: { apiKey: string; databaseId: string }) {
-        console.log("fetchNotion options", options)
-        let { defineMap, me } = await fetchFromNotion(options)
-        this.notionPromptDefineMap = defineMap
-        Object.assign(this.localPromptDefineMap, defineMap)
-        return { defineMap, me }
+        return this.localPromptDefineMap
     }
 }
 

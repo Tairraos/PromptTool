@@ -62,7 +62,7 @@ export class PromptItem {
         let cp = chinesePercentage(text)
         let isZhToEn
         if (!isCommand && cp > 50) {
-            let re = await translatePrompts([text], { to: "en" })
+            let re = await translatePrompts([text], "en")
             if (re?.[0]) {
                 isZhToEn = true
                 this.data.word.langText = text
