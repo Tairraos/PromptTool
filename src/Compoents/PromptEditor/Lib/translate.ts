@@ -17,7 +17,7 @@ export async function translate(testList: string[]) {
     })
 
     if (reqList.length == 0) return resultList.map((x) => x[1])
-    let baseurl = "https://prompt.localweb.com/" //minifix: 你访问该工具的URL
+    let baseurl = "https://prompt.localweb.com/" //minifix: 你访问该工具的URL, 写全域名可以支持 npm run dev 调试，如果不需要调试直接写 / 即可
     let host = baseurl.replace(/\/*$/, "") + "/mtproxy.php" //能访问到代理的路径
     let data = new URLSearchParams()
     data.append("text", reqList.map((req) => `${req[0]}`).join("\n"))
