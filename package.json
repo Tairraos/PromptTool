@@ -1,6 +1,6 @@
 {
   "name": "sd-prompt-tool",
-  "version": "1.5.0",
+  "version": "1.5.1.local",
   "license": "MIT",
   "type": "module",
   "scripts": {

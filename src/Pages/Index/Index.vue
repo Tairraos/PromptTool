@@ -1,7 +1,11 @@
 <template>
     <div class="IndexPage">
         <nav>
-            <div class="title">😍🅿𝗋𝗈𝗆𝗉𝗍 小助手😍</div>
+            <div class="title">
+                😍🅿𝗋𝗈𝗆𝗉𝗍 小助手😍<a href="https://github.com/Tairraos/SDPromptTool" target="github"
+                    ><Icon icon="ri:github-fill" /><span>Github</span></a
+                >
+            </div>
             <div class="dict-button-box" @click="toggleDictPad()">
                 提示词词典
                 <button class="icon dict-button"><Icon icon="mingcute:book-4-fill" /></button>
@@ -33,6 +37,16 @@
         .title {
             font-size: 24px;
             font-weight: 900;
+        }
+        .title a,
+        .title span {
+            margin-left: 5px;
+            font-size: 20px;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+        .title svg{
+            font-size: 25px;
         }
 
         .dict-button-box {
