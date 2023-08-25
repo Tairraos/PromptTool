@@ -39,14 +39,18 @@
             font-weight: 900;
         }
         .title a,
-        .title span {
+        .title span,
+        .title svg {
             margin-left: 5px;
             font-size: 20px;
             text-decoration: none;
             vertical-align: middle;
+            font-family: none;
+            font-weight: bold;
         }
-        .title svg{
-            font-size: 25px;
+        .title svg {
+            font-size: 28px;
+            margin-left: 60px;
         }
 
         .dict-button-box {
