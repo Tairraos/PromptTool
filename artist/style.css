@@ -19,3 +19,46 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
     background: #fff;
 }
+
+#preview {
+    width: 100%;
+    border: 0;
+    height: calc(100% - 40px);
+}
+
+#nav {
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: flex-end;
+}
+
+.fullwin {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.navbtn {
+    font-size: 18px;
+    font-weight: 600;
+    /* margin: 10px 10px 0 10px; */
+    cursor: pointer;
+    padding: 4px 10px;
+}
+
+#tags {
+    margin: auto;
+}
+
+.tips{
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #500;
+}

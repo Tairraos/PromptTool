@@ -3,7 +3,7 @@
 # 1 介绍
 ## 1.1 工程说明
  - 本工程是 moonvy.com 的 OPS 项目分支，[点击访问原工程链接](https://github.com/Moonvy/OpenPromptStudio)
- - 本工程有单机 release 包，如果你有 web 服务器，[下载release包](https://github.com/Tairraos/SDPromptTool/releases) 解压即完成部署
+ - 本工程有单机 release 包，如果你有 web 服务器，[下载release包](https://github.com/Tairraos/PromptTool/releases) 解压即完成部署
 
 ## 1.2 提示词小助手 | 可视化编辑提示词
 
@@ -20,7 +20,7 @@
 
 # 2 部署
 ## 2.1 已有服务器部署
- - 如果你已经有本机 web 服务器，要部署在域名根上，[下载release包](https://github.com/Tairraos/SDPromptTool/releases) 解压即完成部署
+ - 如果你已经有本机 web 服务器，要部署在域名根上，[下载release包](https://github.com/Tairraos/PromptTool/releases) 解压即完成部署
  - 如果你你还没有本机 web 服务器，继续阅读
 
 ## 2.2 准备服务器和文件目录
@@ -63,11 +63,11 @@
 </Directory>
 ```
  - 重启 apache，浏览器里访问 (https://prompt.localweb.com/) 看到 `test pass`, 说明本地服务器准备好了
- - [下载release包](https://github.com/Tairraos/SDPromptTool/releases) 解压即完成部署
+ - [下载release包](https://github.com/Tairraos/PromptTool/releases) 解压即完成部署
  - 如果你不想部署在 web 根位置，继续阅读
 
 ## 2.4 手动 Build 部署
- - `git clone https://github.com/Tairraos/SDPromptTool.git`
+ - `git clone https://github.com/Tairraos/PromptTool.git`
  - `cd SDPromptTool`
  - `npm i`
  - 全文搜索 `minifix` 修改四处URL

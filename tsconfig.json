@@ -4,5 +4,5 @@
         "resolveJsonModule": true,
         "noImplicitThis": true
     },
-    "include": ["src", "web"]
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "web"]
 }

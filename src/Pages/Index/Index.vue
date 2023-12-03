@@ -2,9 +2,7 @@
     <div class="IndexPage">
         <nav>
             <div class="title">
-                😍🅿𝗋𝗈𝗆𝗉𝗍 小助手😍<a href="https://github.com/Tairraos/SDPromptTool" target="github"
-                    ><Icon icon="ri:github-fill" /><span>Github</span></a
-                >
+                😍🅿𝗋𝗈𝗆𝗉𝗍 小助手😍<a href="https://github.com/Tairraos/PromptTool" target="github"><Icon icon="ri:github-fill" /><span>Github</span></a><a href="artist/"><Icon icon="fluent-emoji-high-contrast:artist" /><span>Artist Prompt</span></a>
             </div>
             <div class="dict-button-box" @click="toggleDictPad()">
                 提示词词典
