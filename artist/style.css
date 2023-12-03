@@ -1,0 +1,21 @@
+td,
+th {
+    padding: 10px 20px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.head td,
+.head th {
+    background: #333;
+    color: white;
+    font-weight: 900;
+}
+
+tr:nth-child(odd) {
+    background: #eee;
+}
+
+tr:nth-child(even) {
+    background: #fff;
+}
